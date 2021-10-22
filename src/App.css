@@ -1,0 +1,21 @@
+.app-wrapper {
+    display: grid;
+    grid-template-areas:
+            "head head head head"
+            ".  nav  main. ";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 2fr 2fr 10fr 2fr;
+
+}
+
+.app-wrapper-content {
+    grid-area: main;
+    background-color: whitesmoke;
+    min-height: 800px;
+    margin-top: 2px;
+    margin: 2px;
+    padding: 10px;
+
+}
+
+

@@ -1,0 +1,35 @@
+.nav {
+  grid-area: nav;
+  background-color: #AFBCDB;
+  margin: 2px;
+}
+.item a{
+  color: white;
+  width:1fr;
+  height: 30px;
+  margin-top: 10px;
+
+  color: antiquewhite;
+  text-decoration: none;
+}
+.item {
+  width:1fr;
+  height: 30px;
+  margin-top: 10px;
+  padding-left: 20px;
+  color: antiquewhite;
+  text-decoration: none;
+}
+
+.item a.active{
+  color: goldenrod;
+  text-decoration: none;
+}
+.item:hover {
+  cursor: pointer;
+  background: #332875;
+  text-decoration: none;
+  height: 30px;
+
+
+}

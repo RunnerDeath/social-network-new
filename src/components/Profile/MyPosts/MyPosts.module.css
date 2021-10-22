@@ -1,0 +1,6 @@
+textarea{
+    resize: none;
+}
+button:disabled{
+    cursor: not-allowed;
+}

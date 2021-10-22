@@ -1,0 +1,1050 @@
+Index: src/index.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import React from 'react';\r\nimport ReactDOM from 'react-dom';\r\nimport './index.css';\r\nimport App from './App';\r\nimport reportWebVitals from './reportWebVitals';\r\n\r\nReactDOM.render(\r\n  <React.StrictMode>\r\n    <App />\r\n  </React.StrictMode>,\r\n  document.getElementById('root')\r\n);\r\n\r\n// If you want to start measuring performance in your app, pass a function\r\n// to log results (for example: reportWebVitals(console.log))\r\n// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals\r\nreportWebVitals();\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/index.js	(revision 9ea58def83b44c8e12eab1524cf833a174c86231)
++++ src/index.js	(date 1616953789119)
+@@ -3,15 +3,27 @@
+ import './index.css';
+ import App from './App';
+ import reportWebVitals from './reportWebVitals';
++import store from './state/redux-store'
++import {BrowserRouter} from "react-router-dom";
+ 
+-ReactDOM.render(
+-  <React.StrictMode>
+-    <App />
+-  </React.StrictMode>,
+-  document.getElementById('root')
+-);
++let rerenderEntireTree=(state)=>{
++        ReactDOM.render(
++      <BrowserRouter>
++            <App appState = {state}
++            dispatch = {store.dispatch.bind(store)}
++            store={store}/>
++      </BrowserRouter>,
++        document.getElementById('root'));
++    }
++rerenderEntireTree(store.getState());
++store.subscribe(()=>{
++    let state = store.getState();
++    rerenderEntireTree(state)
++});
++
++
+ 
+ // If you want to start measuring performance in your app, pass a function
+ // to log results (for example: reportWebVitals(console.log))
+ // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+-reportWebVitals();
++reportWebVitals();
+\ No newline at end of file
+Index: src/components/Music/Music.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Music/Music.jsx	(date 1614287830622)
++++ src/components/Music/Music.jsx	(date 1614287830622)
+@@ -0,0 +1,10 @@
++import React from 'react'
++
++const Music = () => {
++    return (
++        <div>
++            Музыка
++        </div>
++    )
++}
++export default Music
+\ No newline at end of file
+Index: package-lock.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package-lock.json	(revision 9ea58def83b44c8e12eab1524cf833a174c86231)
++++ package-lock.json	(date 1634916361737)
+@@ -2276,6 +2276,15 @@
+         "@types/node": "*"
+       }
+     },
++    "@types/hoist-non-react-statics": {
++      "version": "3.3.1",
++      "resolved": "https://registry.npmjs.org/@types/hoist-non-react-statics/-/hoist-non-react-statics-3.3.1.tgz",
++      "integrity": "sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==",
++      "requires": {
++        "@types/react": "*",
++        "hoist-non-react-statics": "^3.3.0"
++      }
++    },
+     "@types/html-minifier-terser": {
+       "version": "5.1.2",
+       "resolved": "https://registry.npmjs.org/@types/html-minifier-terser/-/html-minifier-terser-5.1.2.tgz",
+@@ -2455,11 +2464,37 @@
+       "resolved": "https://registry.npmjs.org/@types/prettier/-/prettier-2.4.1.tgz",
+       "integrity": "sha512-Fo79ojj3vdEZOHg3wR9ksAMRz4P3S5fDB5e/YWZiFnyFQI1WY2Vftu9XoXVVtJfxB7Bpce/QTqWSSntkz2Znrw=="
+     },
++    "@types/prop-types": {
++      "version": "15.7.4",
++      "resolved": "https://registry.npmjs.org/@types/prop-types/-/prop-types-15.7.4.tgz",
++      "integrity": "sha512-rZ5drC/jWjrArrS8BR6SIr4cWpW09RNTYt9AMZo3Jwwif+iacXAqgVjm0B0Bv/S1jhDXKHqRVNCbACkJ89RAnQ=="
++    },
+     "@types/q": {
+       "version": "1.5.5",
+       "resolved": "https://registry.npmjs.org/@types/q/-/q-1.5.5.tgz",
+       "integrity": "sha512-L28j2FcJfSZOnL1WBjDYp2vUHCeIFlyYI/53EwD/rKUBQ7MtUUfbQWiyKJGpcnv4/WgrhWsFKrcPstcAt/J0tQ=="
+     },
++    "@types/react": {
++      "version": "17.0.31",
++      "resolved": "https://registry.npmjs.org/@types/react/-/react-17.0.31.tgz",
++      "integrity": "sha512-MQSR5EL4JZtdWRvqDgz9kXhSDDoy2zMTYyg7UhP+FZ5ttUOocWyxiqFJiI57sUG0BtaEX7WDXYQlkCYkb3X9vQ==",
++      "requires": {
++        "@types/prop-types": "*",
++        "@types/scheduler": "*",
++        "csstype": "^3.0.2"
++      }
++    },
++    "@types/react-redux": {
++      "version": "7.1.20",
++      "resolved": "https://registry.npmjs.org/@types/react-redux/-/react-redux-7.1.20.tgz",
++      "integrity": "sha512-q42es4c8iIeTgcnB+yJgRTTzftv3eYYvCZOh1Ckn2eX/3o5TdsQYKUWpLoLuGlcY/p+VAhV9IOEZJcWk/vfkXw==",
++      "requires": {
++        "@types/hoist-non-react-statics": "^3.3.0",
++        "@types/react": "*",
++        "hoist-non-react-statics": "^3.3.0",
++        "redux": "^4.0.0"
++      }
++    },
+     "@types/resolve": {
+       "version": "0.0.8",
+       "resolved": "https://registry.npmjs.org/@types/resolve/-/resolve-0.0.8.tgz",
+@@ -2468,6 +2503,11 @@
+         "@types/node": "*"
+       }
+     },
++    "@types/scheduler": {
++      "version": "0.16.2",
++      "resolved": "https://registry.npmjs.org/@types/scheduler/-/scheduler-0.16.2.tgz",
++      "integrity": "sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew=="
++    },
+     "@types/source-list-map": {
+       "version": "0.1.2",
+       "resolved": "https://registry.npmjs.org/@types/source-list-map/-/source-list-map-0.1.2.tgz",
+@@ -4871,6 +4911,11 @@
+         }
+       }
+     },
++    "csstype": {
++      "version": "3.0.9",
++      "resolved": "https://registry.npmjs.org/csstype/-/csstype-3.0.9.tgz",
++      "integrity": "sha512-rpw6JPxK6Rfg1zLOYCSwle2GFOOsnjmDYDaBwEcwoOg4qlsIVCN789VkBZDJAGi4T07gI4YSutR43t9Zz4Lzuw=="
++    },
+     "cyclist": {
+       "version": "1.0.1",
+       "resolved": "https://registry.npmjs.org/cyclist/-/cyclist-1.0.1.tgz",
+@@ -7110,6 +7155,19 @@
+       "resolved": "https://registry.npmjs.org/hex-color-regex/-/hex-color-regex-1.1.0.tgz",
+       "integrity": "sha512-l9sfDFsuqtOqKDsQdqrMRk0U85RZc0RtOR9yPI7mRVOa4FsR/BVnZ0shmQRM96Ji99kYZP/7hn1cedc1+ApsTQ=="
+     },
++    "history": {
++      "version": "4.10.1",
++      "resolved": "https://registry.npmjs.org/history/-/history-4.10.1.tgz",
++      "integrity": "sha512-36nwAD620w12kuzPAsyINPWJqlNbij+hpK1k9XRloDtym8mxzGYl2c17LnV6IAGB2Dmg4tEa7G7DlawS0+qjew==",
++      "requires": {
++        "@babel/runtime": "^7.1.2",
++        "loose-envify": "^1.2.0",
++        "resolve-pathname": "^3.0.0",
++        "tiny-invariant": "^1.0.2",
++        "tiny-warning": "^1.0.0",
++        "value-equal": "^1.0.1"
++      }
++    },
+     "hmac-drbg": {
+       "version": "1.0.1",
+       "resolved": "https://registry.npmjs.org/hmac-drbg/-/hmac-drbg-1.0.1.tgz",
+@@ -7120,6 +7178,14 @@
+         "minimalistic-crypto-utils": "^1.0.1"
+       }
+     },
++    "hoist-non-react-statics": {
++      "version": "3.3.2",
++      "resolved": "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-3.3.2.tgz",
++      "integrity": "sha512-/gGivxi8JPKWNm/W0jSmzcMPpfpPLc3dY/6GxhX2hQ9iGj3aDfklV4ET7NjKpSinLpJ5vafa9iiGIEZg10SfBw==",
++      "requires": {
++        "react-is": "^16.7.0"
++      }
++    },
+     "hoopy": {
+       "version": "0.1.4",
+       "resolved": "https://registry.npmjs.org/hoopy/-/hoopy-0.1.4.tgz",
+@@ -9798,6 +9864,15 @@
+       "resolved": "https://registry.npmjs.org/min-indent/-/min-indent-1.0.1.tgz",
+       "integrity": "sha512-I9jwMn07Sy/IwOj3zVkVik2JTvgpaykDZEigL6Rx6N9LbMywwUSMtxET+7lVoDLLd3O3IXwJwvuuns8UB/HeAg=="
+     },
++    "mini-create-react-context": {
++      "version": "0.4.1",
++      "resolved": "https://registry.npmjs.org/mini-create-react-context/-/mini-create-react-context-0.4.1.tgz",
++      "integrity": "sha512-YWCYEmd5CQeHGSAKrYvXgmzzkrvssZcuuQDDeqkT+PziKGMgE+0MCCtcKbROzocGBG1meBLl2FotlRwf4gAzbQ==",
++      "requires": {
++        "@babel/runtime": "^7.12.1",
++        "tiny-warning": "^1.0.3"
++      }
++    },
+     "mini-css-extract-plugin": {
+       "version": "0.11.3",
+       "resolved": "https://registry.npmjs.org/mini-css-extract-plugin/-/mini-css-extract-plugin-0.11.3.tgz",
+@@ -12196,11 +12271,70 @@
+       "resolved": "https://registry.npmjs.org/react-is/-/react-is-16.13.1.tgz",
+       "integrity": "sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ=="
+     },
++    "react-redux": {
++      "version": "7.2.5",
++      "resolved": "https://registry.npmjs.org/react-redux/-/react-redux-7.2.5.tgz",
++      "integrity": "sha512-Dt29bNyBsbQaysp6s/dN0gUodcq+dVKKER8Qv82UrpeygwYeX1raTtil7O/fftw/rFqzaf6gJhDZRkkZnn6bjg==",
++      "requires": {
++        "@babel/runtime": "^7.12.1",
++        "@types/react-redux": "^7.1.16",
++        "hoist-non-react-statics": "^3.3.2",
++        "loose-envify": "^1.4.0",
++        "prop-types": "^15.7.2",
++        "react-is": "^16.13.1"
++      }
++    },
+     "react-refresh": {
+       "version": "0.8.3",
+       "resolved": "https://registry.npmjs.org/react-refresh/-/react-refresh-0.8.3.tgz",
+       "integrity": "sha512-X8jZHc7nCMjaCqoU+V2I0cOhNW+QMBwSUkeXnTi8IPe6zaRWfn60ZzvFDZqWPfmSJfjub7dDW1SP0jaHWLu/hg=="
+     },
++    "react-router": {
++      "version": "5.2.1",
++      "resolved": "https://registry.npmjs.org/react-router/-/react-router-5.2.1.tgz",
++      "integrity": "sha512-lIboRiOtDLFdg1VTemMwud9vRVuOCZmUIT/7lUoZiSpPODiiH1UQlfXy+vPLC/7IWdFYnhRwAyNqA/+I7wnvKQ==",
++      "requires": {
++        "@babel/runtime": "^7.12.13",
++        "history": "^4.9.0",
++        "hoist-non-react-statics": "^3.1.0",
++        "loose-envify": "^1.3.1",
++        "mini-create-react-context": "^0.4.0",
++        "path-to-regexp": "^1.7.0",
++        "prop-types": "^15.6.2",
++        "react-is": "^16.6.0",
++        "tiny-invariant": "^1.0.2",
++        "tiny-warning": "^1.0.0"
++      },
++      "dependencies": {
++        "isarray": {
++          "version": "0.0.1",
++          "resolved": "https://registry.npmjs.org/isarray/-/isarray-0.0.1.tgz",
++          "integrity": "sha1-ihis/Kmo9Bd+Cav8YDiTmwXR7t8="
++        },
++        "path-to-regexp": {
++          "version": "1.8.0",
++          "resolved": "https://registry.npmjs.org/path-to-regexp/-/path-to-regexp-1.8.0.tgz",
++          "integrity": "sha512-n43JRhlUKUAlibEJhPeir1ncUID16QnEjNpwzNdO3Lm4ywrBpBZ5oLD0I6br9evr1Y9JTqwRtAh7JLoOzAQdVA==",
++          "requires": {
++            "isarray": "0.0.1"
++          }
++        }
++      }
++    },
++    "react-router-dom": {
++      "version": "5.3.0",
++      "resolved": "https://registry.npmjs.org/react-router-dom/-/react-router-dom-5.3.0.tgz",
++      "integrity": "sha512-ObVBLjUZsphUUMVycibxgMdh5jJ1e3o+KpAZBVeHcNQZ4W+uUGGWsokurzlF4YOldQYRQL4y6yFRWM4m3svmuQ==",
++      "requires": {
++        "@babel/runtime": "^7.12.13",
++        "history": "^4.9.0",
++        "loose-envify": "^1.3.1",
++        "prop-types": "^15.6.2",
++        "react-router": "5.2.1",
++        "tiny-invariant": "^1.0.2",
++        "tiny-warning": "^1.0.0"
++      }
++    },
+     "react-scripts": {
+       "version": "4.0.3",
+       "resolved": "https://registry.npmjs.org/react-scripts/-/react-scripts-4.0.3.tgz",
+@@ -12342,6 +12476,14 @@
+         "strip-indent": "^3.0.0"
+       }
+     },
++    "redux": {
++      "version": "4.1.1",
++      "resolved": "https://registry.npmjs.org/redux/-/redux-4.1.1.tgz",
++      "integrity": "sha512-hZQZdDEM25UY2P493kPYuKqviVwZ58lEmGQNeQ+gXa+U0gYPUBf7NKYazbe3m+bs/DzM/ahN12DbF+NG8i0CWw==",
++      "requires": {
++        "@babel/runtime": "^7.9.2"
++      }
++    },
+     "regenerate": {
+       "version": "1.4.2",
+       "resolved": "https://registry.npmjs.org/regenerate/-/regenerate-1.4.2.tgz",
+@@ -12575,6 +12717,11 @@
+       "resolved": "https://registry.npmjs.org/resolve-from/-/resolve-from-4.0.0.tgz",
+       "integrity": "sha512-pb/MYmXstAkysRFx8piNI1tGFNQIFA3vkE3Gq4EuA1dF6gHp/+vgZqsCGJapvy8N3Q+4o7FwvquPJcnZ7RYy4g=="
+     },
++    "resolve-pathname": {
++      "version": "3.0.0",
++      "resolved": "https://registry.npmjs.org/resolve-pathname/-/resolve-pathname-3.0.0.tgz",
++      "integrity": "sha512-C7rARubxI8bXFNB/hqcp/4iUeIXJhJZvFPFPiSPRnhU5UPxzMFIl+2E6yY6c4k9giDJAhtV+enfA+G89N6Csng=="
++    },
+     "resolve-url": {
+       "version": "0.2.1",
+       "resolved": "https://registry.npmjs.org/resolve-url/-/resolve-url-0.2.1.tgz",
+@@ -14151,6 +14298,16 @@
+       "resolved": "https://registry.npmjs.org/timsort/-/timsort-0.3.0.tgz",
+       "integrity": "sha1-QFQRqOfmM5/mTbmiNN4R3DHgK9Q="
+     },
++    "tiny-invariant": {
++      "version": "1.1.0",
++      "resolved": "https://registry.npmjs.org/tiny-invariant/-/tiny-invariant-1.1.0.tgz",
++      "integrity": "sha512-ytxQvrb1cPc9WBEI/HSeYYoGD0kWnGEOR8RY6KomWLBVhqz0RgTwVO9dLrGz7dC+nN9llyI7OKAgRq8Vq4ZBSw=="
++    },
++    "tiny-warning": {
++      "version": "1.0.3",
++      "resolved": "https://registry.npmjs.org/tiny-warning/-/tiny-warning-1.0.3.tgz",
++      "integrity": "sha512-lBN9zLN/oAf68o3zNXYrdCt1kP8WsiGW8Oo2ka41b2IM5JL/S1CTyX1rW0mb/zSuJun0ZUrDxx4sqvYS2FWzPA=="
++    },
+     "tmpl": {
+       "version": "1.0.5",
+       "resolved": "https://registry.npmjs.org/tmpl/-/tmpl-1.0.5.tgz",
+@@ -14611,6 +14768,11 @@
+         "spdx-expression-parse": "^3.0.0"
+       }
+     },
++    "value-equal": {
++      "version": "1.0.1",
++      "resolved": "https://registry.npmjs.org/value-equal/-/value-equal-1.0.1.tgz",
++      "integrity": "sha512-NOJ6JZCAWr0zlxZt+xqCHNTEKOsrks2HQd4MqhP1qy4z1SkbEP467eNx6TgDKXMvUOb+OENfJCZwM+16n7fRfw=="
++    },
+     "vary": {
+       "version": "1.1.2",
+       "resolved": "https://registry.npmjs.org/vary/-/vary-1.1.2.tgz",
+Index: src/components/News/News.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/News/News.jsx	(date 1614326243674)
++++ src/components/News/News.jsx	(date 1614326243674)
+@@ -0,0 +1,10 @@
++import React from 'react'
++
++const News = () => {
++    return (
++        <div>
++            Новости
++        </div>
++    )
++}
++export default News
+\ No newline at end of file
+Index: package.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>{\r\n  \"name\": \"social-network-new\",\r\n  \"version\": \"0.1.0\",\r\n  \"private\": true,\r\n  \"dependencies\": {\r\n    \"@testing-library/jest-dom\": \"^5.14.1\",\r\n    \"@testing-library/react\": \"^11.2.7\",\r\n    \"@testing-library/user-event\": \"^12.8.3\",\r\n    \"react\": \"^17.0.2\",\r\n    \"react-dom\": \"^17.0.2\",\r\n    \"react-scripts\": \"4.0.3\",\r\n    \"web-vitals\": \"^1.1.2\"\r\n  },\r\n  \"scripts\": {\r\n    \"start\": \"react-scripts start\",\r\n    \"build\": \"react-scripts build\",\r\n    \"test\": \"react-scripts test\",\r\n    \"eject\": \"react-scripts eject\"\r\n  },\r\n  \"eslintConfig\": {\r\n    \"extends\": [\r\n      \"react-app\",\r\n      \"react-app/jest\"\r\n    ]\r\n  },\r\n  \"browserslist\": {\r\n    \"production\": [\r\n      \">0.2%\",\r\n      \"not dead\",\r\n      \"not op_mini all\"\r\n    ],\r\n    \"development\": [\r\n      \"last 1 chrome version\",\r\n      \"last 1 firefox version\",\r\n      \"last 1 safari version\"\r\n    ]\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- package.json	(revision 9ea58def83b44c8e12eab1524cf833a174c86231)
++++ package.json	(date 1634990999385)
+@@ -8,7 +8,10 @@
+     "@testing-library/user-event": "^12.8.3",
+     "react": "^17.0.2",
+     "react-dom": "^17.0.2",
++    "react-redux": "^7.2.5",
++    "react-router-dom": "^5.3.0",
+     "react-scripts": "4.0.3",
++    "redux": "^4.1.1",
+     "web-vitals": "^1.1.2"
+   },
+   "scripts": {
+Index: src/components/DialogItem/DialogElement/DialogItem.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/DialogItem/DialogElement/DialogItem.jsx	(date 1615133793154)
++++ src/components/DialogItem/DialogElement/DialogItem.jsx	(date 1615133793154)
+@@ -0,0 +1,13 @@
++import React from 'react'
++import s from './../Dialogs.module.css';
++import {NavLink} from "react-router-dom";
++
++const DialogItem = (props) => {
++    return (
++        <div className={s.dialog}>
++            <NavLink to={'/dialogs/' + props.id}>{props.name}</NavLink>
++        </div>
++    )
++}
++
++export default DialogItem
+\ No newline at end of file
+Index: src/components/DialogItem/Message/Message.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/DialogItem/Message/Message.jsx	(date 1615132340940)
++++ src/components/DialogItem/Message/Message.jsx	(date 1615132340940)
+@@ -0,0 +1,14 @@
++import React from 'react'
++import s from './../Dialogs.module.css';
++
++
++const Message = (props) => {
++    return (
++        <div>
++            <div className={s.message}>{props.name}</div>
++
++        </div>
++    )
++
++}
++export default Message
+\ No newline at end of file
+Index: src/components/DialogItem/Dialogs.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/DialogItem/Dialogs.jsx	(date 1617732526213)
++++ src/components/DialogItem/Dialogs.jsx	(date 1617732526213)
+@@ -0,0 +1,35 @@
++import React from 'react'
++import s from './Dialogs.module.css';
++import DialogItem from "./DialogElement/DialogItem";
++import Message from "./Message/Message";
++
++
++const Dialogs = (props) => {
++
++    let dialogsElement = props.dialogsPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
++    let messageElement = props.dialogsPage.messageData.map(message => <Message name={message.message}/>)
++    let textMessageElement = React.createRef()
++    let sendMessage = ()=>{
++        props.sendMessage()
++    };
++    let updateMessageText = ()=>{
++        let messageText = textMessageElement.current.value
++        props.updateMessageText(messageText)
++    };
++    return (
++        <div className={s.dialogs}>
++            <div className={s.dialogItem}>
++
++                {dialogsElement}
++            </div>
++            <div className={s.messages}>
++                {messageElement}
++            <span className={s.sendMessage}>
++                <textarea placeholder='Enter your message here' onChange={updateMessageText} ref = {textMessageElement}
++                          value={props.dialogsPage.messageText}></textarea>
++                <div><button onClick = {sendMessage} > Send message</button></div></span>
++            </div>
++        </div>
++    )
++}
++export default Dialogs
+\ No newline at end of file
+Index: src/App.js
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import logo from './logo.svg';\r\nimport './App.css';\r\n\r\nfunction App() {\r\n  return (\r\n    <div className=\"App\">\r\n      <header className=\"App-header\">\r\n        <img src={logo} className=\"App-logo\" alt=\"logo\" />\r\n        <p>\r\n          Edit <code>src/App.js</code> and save to reload.\r\n        </p>\r\n        <a\r\n          className=\"App-link\"\r\n          href=\"https://reactjs.org\"\r\n          target=\"_blank\"\r\n          rel=\"noopener noreferrer\"\r\n        >\r\n          Learn React\r\n        </a>\r\n      </header>\r\n    </div>\r\n  );\r\n}\r\n\r\nexport default App;\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/App.js	(revision 9ea58def83b44c8e12eab1524cf833a174c86231)
++++ src/App.js	(date 1634488069371)
+@@ -1,25 +1,32 @@
+-import logo from './logo.svg';
++import React from 'react';
+ import './App.css';
++import Header from './components/Header/Header';
++import Navbar from './components/Navbar/Navbar';
++import Profile from './components/Profile/Profile';
++
++import {BrowserRouter, Route} from "react-router-dom";
++import Music from "./components/Music/Music";
++import News from "./components/News/News";
++import Settings from "./components/Settings/Settings";
++import DialogsContainer from "./components/DialogItem/DialogsContainer";
+ 
+-function App() {
+-  return (
+-    <div className="App">
+-      <header className="App-header">
+-        <img src={logo} className="App-logo" alt="logo" />
+-        <p>
+-          Edit <code>src/App.js</code> and save to reload.
+-        </p>
+-        <a
+-          className="App-link"
+-          href="https://reactjs.org"
+-          target="_blank"
+-          rel="noopener noreferrer"
+-        >
+-          Learn React
+-        </a>
+-      </header>
+-    </div>
+-  );
++
++const App = (props) => {
++    return (
++        <BrowserRouter>
++            <div className='app-wrapper'>
++                <Header/>
++                <Navbar/>
++                <div className='app-wrapper-content'>
++                    <Route path='/dialogs' render={() => <DialogsContainer store={props.store}/>}/>
++                    <Route path='/profile' render={() => <Profile store = {props.store}/>}/>
++                    <Route path='/news' component={News}/>
++                    <Route path='/music' component={Music}/>
++                    <Route path='/settings' component={Settings}/>
++                </div>
++            </div>
++        </BrowserRouter>
++    )
+ }
+ 
+ export default App;
+Index: src/components/DialogItem/Dialogs.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/DialogItem/Dialogs.module.css	(date 1634991637034)
++++ src/components/DialogItem/Dialogs.module.css	(date 1634991637034)
+@@ -0,0 +1,17 @@
++.dialogs{
++    display: grid;
++
++    grid-template-columns: 2fr 10fr;
++}
++.dialogsItem{
++
++}
++.dialog{
++
++}
++.messages{
++
++}
++.sendMessage{
++    display: flex;
++}
+\ No newline at end of file
+Index: src/components/DialogItem/DialogsContainer.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/DialogItem/DialogsContainer.jsx	(date 1634991637040)
++++ src/components/DialogItem/DialogsContainer.jsx	(date 1634991637040)
+@@ -0,0 +1,23 @@
++import React from 'react'
++
++import {sendMessageActionCreator, updateMessageActionCreator} from "../../state/dialogsReducer";
++import Dialogs from "./Dialogs";
++import {connect} from "react-redux";
++
++let mapStateToProps =(state)=>{
++    return {
++        dialogsPage: state.dialogsPage
++    }
++}
++let mapDispatchToProps = (dispatch) =>{
++    return{
++        updateMessageText: (messageText)=>{
++            dispatch(updateMessageActionCreator(messageText));
++        },
++        sendMessage: ()=>{
++            dispatch(sendMessageActionCreator());
++        },
++    }
++}
++const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs)
++export default DialogsContainer
+\ No newline at end of file
+Index: src/components/Settings/Settings.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Settings/Settings.jsx	(date 1614288827671)
++++ src/components/Settings/Settings.jsx	(date 1614288827671)
+@@ -0,0 +1,10 @@
++import React from 'react'
++
++const Settings = () => {
++    return (
++        <div>
++            Настройки
++        </div>
++    )
++}
++export default Settings
+\ No newline at end of file
+Index: src/components/Profile/ProfileDescription/ProfileDescription.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Profile/ProfileDescription/ProfileDescription.jsx	(date 1614354057404)
++++ src/components/Profile/ProfileDescription/ProfileDescription.jsx	(date 1614354057404)
+@@ -0,0 +1,15 @@
++import React from 'react';
++import s from './ProfileDescription.module.css';
++const ProfileDescription = () => {
++  return (
++    <div >
++
++      <img src="https://assorted.downloads.oppo.com/static/archives/images/kz/Events/Banner_T2_Image_tnp3w61gzna8r2n3rojp.jpg"></img>
++      <div>
++        ava + description
++     </div>
++
++    </div>
++  )
++}
++export default ProfileDescription
+\ No newline at end of file
+Index: src/components/Profile/ProfileDescription/ProfileDescription.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Profile/ProfileDescription/ProfileDescription.module.css	(date 1614360846299)
++++ src/components/Profile/ProfileDescription/ProfileDescription.module.css	(date 1614360846299)
+@@ -0,0 +1,4 @@
++div>img{
++  width: 600px;
++  height: 300px;
++}
+\ No newline at end of file
+Index: src/components/Profile/MyPosts/Post/Post.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Profile/MyPosts/Post/Post.module.css	(date 1614413905163)
++++ src/components/Profile/MyPosts/Post/Post.module.css	(date 1614413905163)
+@@ -0,0 +1,14 @@
++.item{
++  color: darkgrey;
++  display: grid;
++  grid-template-columns: 1fr 10fr;
++  grid-template-rows: 1fr 1fr;
++  grid-template-areas: "postImage message"
++"postImage like";
++
++}
++.item img{
++  width: 50px;
++  height: 50px;
++  border-radius: 30px;
++}
+Index: src/components/Profile/MyPosts/Post/Post.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Profile/MyPosts/Post/Post.jsx	(date 1615136816393)
++++ src/components/Profile/MyPosts/Post/Post.jsx	(date 1615136816393)
+@@ -0,0 +1,15 @@
++import React from 'react';
++import s from './Post.module.css';
++
++const Post = (props) => {
++    return (
++        <div className={s.item} >
++            <div className={s.postImage}><img
++                src='data:image/jpeg;base64,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'></img>
++            </div>
++            <div className={s.message}>{props.message}</div>
++            <div className={s.like}>{props.likesCount}</div>
++        </div>
++    )
++}
++export default Post
+\ No newline at end of file
+Index: src/components/Profile/MyPosts/MyPosts.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Profile/MyPosts/MyPosts.jsx	(date 1634587445552)
++++ src/components/Profile/MyPosts/MyPosts.jsx	(date 1634587445552)
+@@ -0,0 +1,34 @@
++import React from 'react';
++import Post from './Post/Post';
++import s from './MyPosts.module.css';
++import {addPostActionCreator, updatePostActionCreator} from "../../../state/profileReducer";
++
++const MyPosts = (props) => {
++    let state = props.profilePage;
++    let postsElement = state.postsData.map(post => <Post message={post.message}
++                                                               likesCount={post.likesCount}/>)
++    let newPostElement = React.createRef()
++    let addNewPost = () => {
++        props.addNewPost()
++    }
++    let updatePostText = () => {
++        let postText = newPostElement.current.value
++        props.updatePostText(postText);
++
++    }
++    return <div>
++        <div className={s.posts}>
++            <h3>My posts</h3>
++        </div>
++        <div>
++            <div className={s.textarea}><textarea ref={newPostElement} value={state.postText}
++                                                  onChange={updatePostText} placeholder='Enter your message'></textarea>
++            </div>
++            <div >
++                <button className={s.button} onClick={addNewPost} disabled={!state.postText}>New Post</button>
++            </div>
++        </div>
++        {postsElement}
++    </div>
++}
++export default MyPosts
+\ No newline at end of file
+Index: src/components/Profile/MyPosts/MyPosts.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Profile/MyPosts/MyPosts.module.css	(date 1616352356703)
++++ src/components/Profile/MyPosts/MyPosts.module.css	(date 1616352356703)
+@@ -0,0 +1,6 @@
++textarea{
++    resize: none;
++}
++button:disabled{
++    cursor: not-allowed;
++}
+\ No newline at end of file
+Index: src/components/Profile/MyPosts/MyPostsContainer.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Profile/MyPosts/MyPostsContainer.jsx	(date 1634587859816)
++++ src/components/Profile/MyPosts/MyPostsContainer.jsx	(date 1634587859816)
+@@ -0,0 +1,25 @@
++import React from 'react';
++import Post from './Post/Post';
++import {addPostActionCreator, updatePostActionCreator} from "../../../state/profileReducer";
++import {connect} from "react-redux";
++import MyPosts from "./MyPosts";
++
++
++const mapStateToProps = (state) => {
++    return {
++        profilePage: state.profilePage
++    }
++};
++const mapDispatchToProps = (dispatch) => {
++    return {
++        addNewPost: () => {
++            dispatch(addPostActionCreator())
++        },
++        updatePostText: (postText) => {
++            dispatch(updatePostActionCreator(postText))
++        }
++    }
++
++};
++const MyPostsContainer = connect(mapStateToProps, mapDispatchToProps)(MyPosts);
++export default MyPostsContainer
+\ No newline at end of file
+Index: .idea/social-network-new.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/social-network-new.iml	(date 1634990637942)
++++ .idea/social-network-new.iml	(date 1634990637942)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<module type="WEB_MODULE" version="4">
++  <component name="NewModuleRootManager">
++    <content url="file://$MODULE_DIR$">
++      <excludeFolder url="file://$MODULE_DIR$/.tmp" />
++      <excludeFolder url="file://$MODULE_DIR$/temp" />
++      <excludeFolder url="file://$MODULE_DIR$/tmp" />
++    </content>
++    <orderEntry type="inheritedJdk" />
++    <orderEntry type="sourceFolder" forTests="false" />
++  </component>
++</module>
+\ No newline at end of file
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/misc.xml	(date 1634990637955)
++++ .idea/misc.xml	(date 1634990637955)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="JavaScriptSettings">
++    <option name="languageLevel" value="JSX" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/vcs.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/vcs.xml	(date 1634990637949)
++++ .idea/vcs.xml	(date 1634990637949)
+@@ -0,0 +1,6 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="VcsDirectoryMappings">
++    <mapping directory="$PROJECT_DIR$" vcs="Git" />
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/.gitignore	(date 1634990638064)
++++ .idea/.gitignore	(date 1634990638064)
+@@ -0,0 +1,5 @@
++# Default ignored files
++/shelf/
++/workspace.xml
++# Editor-based HTTP Client requests
++/httpRequests/
+Index: .idea/modules.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/modules.xml	(date 1634990637960)
++++ .idea/modules.xml	(date 1634990637960)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="ProjectModuleManager">
++    <modules>
++      <module fileurl="file://$PROJECT_DIR$/.idea/social-network-new.iml" filepath="$PROJECT_DIR$/.idea/social-network-new.iml" />
++    </modules>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/components/Profile/Profile.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Profile/Profile.jsx	(date 1617048375978)
++++ src/components/Profile/Profile.jsx	(date 1617048375978)
+@@ -0,0 +1,15 @@
++import React from 'react';
++import ProfileDescription from "./ProfileDescription/ProfileDescription";
++import MyPostsContainer from "./MyPosts/MyPostsContainer";
++
++const Profile = (props) => {
++
++    return (
++        <div>
++            <ProfileDescription/>
++            <MyPostsContainer store = {props.store}/>
++
++        </div>
++    )
++}
++export default Profile
+\ No newline at end of file
+Index: src/App.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>.App {\r\n  text-align: center;\r\n}\r\n\r\n.App-logo {\r\n  height: 40vmin;\r\n  pointer-events: none;\r\n}\r\n\r\n@media (prefers-reduced-motion: no-preference) {\r\n  .App-logo {\r\n    animation: App-logo-spin infinite 20s linear;\r\n  }\r\n}\r\n\r\n.App-header {\r\n  background-color: #282c34;\r\n  min-height: 100vh;\r\n  display: flex;\r\n  flex-direction: column;\r\n  align-items: center;\r\n  justify-content: center;\r\n  font-size: calc(10px + 2vmin);\r\n  color: white;\r\n}\r\n\r\n.App-link {\r\n  color: #61dafb;\r\n}\r\n\r\n@keyframes App-logo-spin {\r\n  from {\r\n    transform: rotate(0deg);\r\n  }\r\n  to {\r\n    transform: rotate(360deg);\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/App.css	(revision 9ea58def83b44c8e12eab1524cf833a174c86231)
++++ src/App.css	(date 1614355483824)
+@@ -1,38 +1,21 @@
+-.App {
+-  text-align: center;
+-}
++.app-wrapper {
++    display: grid;
++    grid-template-areas:
++            "head head head head"
++            ".  nav  main. ";
++    grid-template-rows: 60px 1fr;
++    grid-template-columns: 2fr 2fr 10fr 2fr;
+ 
+-.App-logo {
+-  height: 40vmin;
+-  pointer-events: none;
+ }
+ 
+-@media (prefers-reduced-motion: no-preference) {
+-  .App-logo {
+-    animation: App-logo-spin infinite 20s linear;
+-  }
+-}
++.app-wrapper-content {
++    grid-area: main;
++    background-color: whitesmoke;
++    min-height: 800px;
++    margin-top: 2px;
++    margin: 2px;
++    padding: 10px;
+ 
+-.App-header {
+-  background-color: #282c34;
+-  min-height: 100vh;
+-  display: flex;
+-  flex-direction: column;
+-  align-items: center;
+-  justify-content: center;
+-  font-size: calc(10px + 2vmin);
+-  color: white;
+ }
+ 
+-.App-link {
+-  color: #61dafb;
+-}
+ 
+-@keyframes App-logo-spin {
+-  from {
+-    transform: rotate(0deg);
+-  }
+-  to {
+-    transform: rotate(360deg);
+-  }
+-}
+Index: src/components/Navbar/Navbar.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Navbar/Navbar.jsx	(date 1615327251432)
++++ src/components/Navbar/Navbar.jsx	(date 1615327251432)
+@@ -0,0 +1,14 @@
++import React from 'react';
++import s from './Navbar.module.css';
++import {NavLink} from "react-router-dom";
++
++const Navbar = () => {
++    return <nav className={s.nav}>
++        <div className={s.item}> <NavLink activeClassName={s.active}  to='/profile'><div >Profile</div></NavLink></div>
++        <div className={s.item}> <NavLink activeClassName={s.active}  to='/dialogs'><div >Messages</div></NavLink></div>
++        <div className={s.item}><NavLink activeClassName={s.active} to='/news'><div>News</div></NavLink></div>
++        <div className={s.item}><NavLink activeClassName={s.active} to='/music'><div>Music</div></NavLink></div>
++        <div className={s.item}><NavLink activeClassName={s.active} to='/settings'><div>Settings</div></NavLink></div>
++    </nav>
++}
++export default Navbar
+\ No newline at end of file
+Index: src/components/Navbar/Navbar.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Navbar/Navbar.module.css	(date 1615327161226)
++++ src/components/Navbar/Navbar.module.css	(date 1615327161226)
+@@ -0,0 +1,35 @@
++.nav {
++  grid-area: nav;
++  background-color: #AFBCDB;
++  margin: 2px;
++}
++.item a{
++  color: white;
++  width:1fr;
++  height: 30px;
++  margin-top: 10px;
++
++  color: antiquewhite;
++  text-decoration: none;
++}
++.item {
++  width:1fr;
++  height: 30px;
++  margin-top: 10px;
++  padding-left: 20px;
++  color: antiquewhite;
++  text-decoration: none;
++}
++
++.item a.active{
++  color: goldenrod;
++  text-decoration: none;
++}
++.item:hover {
++  cursor: pointer;
++  background: #332875;
++  text-decoration: none;
++  height: 30px;
++
++
++}
+Index: src/components/Header/Header.module.css
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Header/Header.module.css	(date 1614350957606)
++++ src/components/Header/Header.module.css	(date 1614350957606)
+@@ -0,0 +1,12 @@
++.header {
++    grid-area: head;
++    background-color: #A5AFD6;
++    /* max-height: 100px; */
++
++}
++
++.header img {
++    width: 50px;
++    margin-top: 5px;
++    margin-left: 5px;
++}
+\ No newline at end of file
+Index: src/components/Header/Header.jsx
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/components/Header/Header.jsx	(date 1614100269072)
++++ src/components/Header/Header.jsx	(date 1614100269072)
+@@ -0,0 +1,8 @@
++import React from 'react';
++import s from './Header.module.css';
++const Header = () => {
++    return <header className={s.header}>
++        <img src='data:image/png;base64,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'></img>
++    </header>
++}
++export default Header
+\ No newline at end of file
+diff --git src/components/Music/Music.module.css src/components/Music/Music.module.css
+new file mode 100644
+diff --git src/components/News/News.module.css src/components/News/News.module.css
+new file mode 100644
+diff --git src/components/Settings/Settings.module.css src/components/Settings/Settings.module.css
+new file mode 100644
+diff --git src/components/Profile/Profile.module.css src/components/Profile/Profile.module.css
+new file mode 100644
+diff --git src/components/Users/Users.jsx src/components/Users/Users.jsx
+new file mode 100644

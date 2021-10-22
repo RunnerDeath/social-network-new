@@ -1,0 +1,14 @@
+.item{
+  color: darkgrey;
+  display: grid;
+  grid-template-columns: 1fr 10fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas: "postImage message"
+"postImage like";
+
+}
+.item img{
+  width: 50px;
+  height: 50px;
+  border-radius: 30px;
+}
