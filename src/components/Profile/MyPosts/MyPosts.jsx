@@ -35,4 +35,5 @@ const MyPosts = (props) => {
 }
 PRIVET
 and somethingNEW
+Anotherline
 export default MyPosts
