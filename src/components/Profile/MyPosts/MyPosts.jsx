@@ -1,34 +1,38 @@
 import React from 'react';
 import Post from './Post/Post';
-import s from './MyPosts.module.css';
-import {addPostActionCreator, updatePostActionCreator} from "../../../state/profileReducer";
+import styles from './MyPosts.module.css';
+
 
 const MyPosts = (props) => {
-    let state = props.profilePage;
-    let postsElement = state.postsData.map(post => <Post message={post.message}
-                                                               likesCount={post.likesCount}/>)
-    let newPostElement = React.createRef()
-    let addNewPost = () => {
-        props.addNewPost()
-    }
-    let updatePostText = () => {
-        let postText = newPostElement.current.value
-        props.updatePostText(postText);
 
-    }
+    let postsElement = props.postsData.map(post => <Post message={post.message}
+                                                               likesCount={post.likesCount}/>)
+
+    //Here is the commenta
+
+    let refPostText = React.createRef()
+    let addPost = ()=>{
+        props.addNewPost()
+    };
+    let updatePostText = ()=>{
+        let postText = refPostText.current.value
+        props.updatePostText(postText)
+    };
     return <div>
-        <div className={s.posts}>
+        <div className={styles.posts}>
             <h3>My posts</h3>
         </div>
         <div>
-            <div className={s.textarea}><textarea ref={newPostElement} value={state.postText}
-                                                  onChange={updatePostText} placeholder='Enter your message'></textarea>
+            <div className={styles.textarea}><textarea ref ={refPostText} value={props.postText}
+    onChange={updatePostText} placeholder='Enter your message'/>
             </div>
             <div >
-                <button className={s.button} onClick={addNewPost} disabled={!state.postText}>New Post</button>
+                <button className={styles.button} onClick={addPost} disabled={!props.postText}>New Post</button>
             </div>
         </div>
         {postsElement}
     </div>
 }
+PRIVET
+and somethingNEW
 export default MyPosts

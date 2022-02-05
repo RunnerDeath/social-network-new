@@ -1,0 +1,66 @@
+.rightBlock{
+    padding: 5px;
+    text-align: end;
+    /*border-color: black;*/
+    /*border-style: solid;*/
+
+
+
+}
+.userImg{
+    border-radius: 40%;
+    width: 100px;
+    height: 100px;
+    margin: 5px;
+
+    /*border-color: gray;*/
+    /*border-style: solid;*/
+}
+.button{
+    width: 100px;
+    height: 40px;
+    background: #A5AFD6;
+    border-radius: 5px;
+    text-align: center;
+    border-style: none;
+    margin: 5px;
+
+
+}
+.userBlock{
+    width: 500px;
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    background: #defdff;
+    padding: 10px;
+
+    border-radius: 5px;
+    /*border: red;*/
+    /*border-style: solid;*/
+}
+.leftBlock{
+
+}
+.userName{
+    display: inline-block;
+}
+.country{
+
+}
+.subscribe{
+
+}
+
+.selectedPage{
+    font-weight: bold;
+
+}
+.notSelectedPage{
+    cursor: pointer;
+    color: red;
+}
+.users{
+
+}

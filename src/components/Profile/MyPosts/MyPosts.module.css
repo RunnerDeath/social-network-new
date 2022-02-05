@@ -1,6 +1,9 @@
-textarea{
+.textarea{
     resize: none;
 }
-button:disabled{
+.button:disabled{
     cursor: not-allowed;
+}
+.posts{
+
 }

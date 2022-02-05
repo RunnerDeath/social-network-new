@@ -5,7 +5,7 @@ import Message from "./Message/Message";
 
 
 const Dialogs = (props) => {
-
+debugger
     let dialogsElement = props.dialogsPage.dialogsData.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
     let messageElement = props.dialogsPage.messageData.map(message => <Message name={message.message}/>)
     let textMessageElement = React.createRef()
@@ -26,7 +26,7 @@ const Dialogs = (props) => {
                 {messageElement}
             <span className={s.sendMessage}>
                 <textarea placeholder='Enter your message here' onChange={updateMessageText} ref = {textMessageElement}
-                          value={props.dialogsPage.messageText}></textarea>
+    value={props.dialogsPage.messageText}/>
                 <div><button onClick = {sendMessage} > Send message</button></div></span>
             </div>
         </div>

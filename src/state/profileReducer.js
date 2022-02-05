@@ -1,8 +1,9 @@
 const UPDATE_POST_TEXT = "UPDATE_POST_TEXT"
 const ADD_POST = "ADD_POST"
-export const updatePostActionCreator = (postText) =>
+export const updatePostText = (postText) =>
     ({type: 'UPDATE_POST_TEXT', postText: postText})
-export const addPostActionCreator = () => ({type: 'ADD_POST'})
+export const addNewPost = () => ({type: 'ADD_POST'})
+
 let initialState = {
     postsData: [
         {id: 1, message: 'Hello every one', likesCount: 12},
@@ -27,8 +28,10 @@ const profileReducer = (state = initialState, action) => {
                 postsData: [...state.postsData, post]
             }
 
+            debugger;
 
         case UPDATE_POST_TEXT:
+            debugger;
             return {
                 ...state,
                 postText : action.postText
